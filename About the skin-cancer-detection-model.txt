@@ -1,0 +1,48 @@
+About the Dataset:
+
+The Data set consists of,
+meta data of the images as a csv file and two folders with 5000 images in each folder (total images are in two parts).
+
+
+
+About Metadata file and its attributes:
+
+meta data file consists of lesion_id,image_id,dx,dx_type,age,sex,localization
+image_id is the name of the image in the folders
+dx is the label of the image
+localization is the part of the location in the body
+sex attributes defines whether it is male or female
+dx_type defines whether it is determined by histopathology or follow_up or consensus or confocal.	 
+image_id and dx are the columns used.
+The 7 classes of skin cancer lesions included in this dataset are:
+Melanocytic nevi (nv)
+Melanoma (mel)
+Benign keratosis-like lesions (bkl)
+Basal cell carcinoma (bcc) 
+Actinic keratoses (akiec)
+Vascular lesions (vas)
+Dermatofibroma (df).
+
+
+
+Analysis of the Metadata:
+
+on plotting the count of each class, the images count of each class is totally imbalanced (nv has over 6500 data points where as mel,bkl have around 1000 data points, bcc,akiec,vasc,df have less than and around 500 data points). so to balance the data, resample the data into same number data points let us consider 500. create the new dataframes for each class label and resample the data points in the data frame.
+
+
+
+Dataset generation for the convience:
+
+concat all the dataframes and create a new dataframe which is balanced. creating a new column for the path of each image. now creating the new columns to store the image data as numpy array. numoy array has pixel values from 0-255. Normalise the values to 0-1. X variable has the input data i.e image data (numpy array) and y variable is the output variable (class of the image). Now output value is converted to categorical data and splitting the data for training and testing.
+
+
+
+creating the model:
+
+This model has conv2D,MaxPool2D,Dropout layers with kernel size = (3,3) and with decreasing the filters of each conv2D layers as 256,128,64 with activation function as relu, Dropout layer is used to remove the unwanted or less influencing nodes from the model. In final dense layer softmax function is used which gives the output in probablities. On model compliation 'categorical_crossentropy' is the loss and optimizer is 'Adam' and the metrics is 'accuracy'. Fit the model with 50 epochs and batch size of 16.
+
+
+
+Model analysis:
+
+model validation accuracy is 0.7234 and validation loss is 0.8253. model accuracy is 0.7246 and validation loss is 0.7116. Model loss and accuracy analysis using history, plot and confusion matrix to find the accuracy of each label.
